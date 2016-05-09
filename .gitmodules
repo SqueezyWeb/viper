@@ -1,0 +1,9 @@
+[submodule "includes/CPT_Core"]
+	path = includes/CPT_Core
+	url = https://github.com/WebDevStudios/CPT_Core.git
+[submodule "includes/Taxonomy_Core"]
+	path = includes/Taxonomy_Core
+	url = https://github.com/WebDevStudios/Taxonomy_Core.git
+[submodule "includes/freemius"]
+	path = includes/freemius
+	url = https://github.com/Freemius/wordpress-sdk.git
