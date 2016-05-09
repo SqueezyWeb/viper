@@ -1,0 +1,17 @@
+{
+  "name": "wpackagist-plugin/viper",
+  "description": "Products Showcase for WP",
+  "type": "wordpress-plugin",
+  "license": "GPLv2+",
+  "authors": [
+    {
+      "name": "Mattia Migliorini",
+      "email": "mattia@squeezyweb.com",
+      "role": "Maintainer"
+    }
+  ],
+  "dist": {
+    "url": "git@github.com:SqueezyWeb/viper.git",
+    "type": "git"
+  }
+}
