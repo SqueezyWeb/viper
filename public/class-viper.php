@@ -402,7 +402,7 @@ class Viper {
 
       $products = get_posts( array(
         'posts_per_page' => -1,
-        'product-category' => $atts['category'],
+        'product-category_name' => $atts['category'],
         'post_type' => 'product',
         'orderby' => 'title',
         'order' => 'ASC'
