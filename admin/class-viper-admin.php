@@ -11,7 +11,7 @@
  * @author    Mattia Migliorini <mattia@squeezyweb.com>
  * @license   GPL-2.0+
  * @link      http://www.squeezyweb.com
- * @copyright 2016 2016 SqueezyWeb
+ * @copyright 2016 SqueezyWeb
  */
 
 class Viper_Admin {
@@ -62,7 +62,7 @@ class Viper_Admin {
 		add_action( 'admin_head-index.php', array( $this, 'enqueue_admin_styles' ) );
 
 		// Add the options page and menu item.
-		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 
 

@@ -16,18 +16,18 @@ class v_Debug_Panel extends Debug_Bar_Panel {
        */
 	function render() {
 		echo "<pre>";
-		foreach ( $GLOBALS['PN_Debug'] as $debug ) {
+		foreach ( $GLOBALS['v_Debug'] as $debug ) {
 			echo $debug;
 		}
 		echo "</pre>";
 	}
 
       /**
-       * 
+       *
        * @return void
        */
 	function prerender() {
-		if ( empty( $GLOBALS['PN_Debug'] ) ) {
+		if ( empty( $GLOBALS['v_Debug'] ) ) {
 			$this->set_visible( false );
 		}
 	}

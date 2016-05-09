@@ -10,7 +10,7 @@
  * @author    Mattia Migliorini <mattia@squeezyweb.com>
  * @license   GPL-2.0+
  * @link      http://www.squeezyweb.com
- * @copyright 2016 2016 SqueezyWeb
+ * @copyright 2016 SqueezyWeb
  *
  * Plugin Name:       Products Showcase for WP
  * Plugin URI:        @TODO

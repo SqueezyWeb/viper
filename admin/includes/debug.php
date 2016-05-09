@@ -2,11 +2,11 @@
 
 /**
  * Provides interface for debugging variables with Debug Bar
- * 
- * @package   PN_Ad_Admin
+ *
+ * @package   v_Ad_Admin
  * @author    Benjamin J. Balter <ben@balter.com> & Mte90 <mte90net@gmail.com>
  * @license   GPL-2.0+
- * @copyright 2014 
+ * @copyright 2014
  *
  */
 class v_Debug {
@@ -62,16 +62,16 @@ class v_Debug {
 		// Allow this to be used as a filter
 		return $var;
 	}
-	
+
 	/**
 	 * Extend Debug_Bar_Panel
 	 * @param array $panels The default panels.
 	 * @return array passback The original panels.
 	 */
 	function init_panel( $panels ) {
-		if ( !class_exists( 'PN_Debug_Panel' ) ) {
-			require_once('PN_Debug_Panel.php');
-			$panels[] = new PN_Debug_Panel();
+		if ( !class_exists( 'v_Debug_Panel' ) ) {
+			require_once('v_Debug_Panel.php');
+			$panels[] = new v_Debug_Panel();
 		}
 		return $panels;
 	}
