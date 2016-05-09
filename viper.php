@@ -15,7 +15,7 @@
  * Plugin Name:       Products Showcase for WP
  * Plugin URI:        @TODO
  * Description:       @TODO
- * Version:           1.0.0
+ * Version:           1.0.0-beta1
  * Author:            Mattia Migliorini
  * Author URI:        http://www.squeezyweb.com
  * Text Domain:       viper
