@@ -400,13 +400,13 @@ class Viper {
         'products'
       );
 
-      $products = get_posts(
+      $products = get_posts( array(
         'posts_per_page' => -1,
         'product-category' => $atts['category'],
         'post_type' => 'product',
         'orderby' => 'title',
         'order' => 'ASC'
-      );
+      ));
 
       // Initialize classes for template.
 
