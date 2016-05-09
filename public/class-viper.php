@@ -430,7 +430,7 @@ class Viper {
 
       // TODO: include template to display products loop.
       ob_start();
-      v_get_template_part( 'shortcode', 'products', true );
+      include v_get_template_part( 'shortcode', 'products', false );
       return ob_get_clean();
     }
 
