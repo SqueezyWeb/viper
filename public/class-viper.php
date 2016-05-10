@@ -28,7 +28,7 @@ class Viper {
    *
    * @var     string
    */
-  const VERSION = '1.0.0-beta1';
+  const VERSION = '1.0.0-beta2';
 
   /**
    * Unique identifier for your plugin.
