@@ -324,26 +324,6 @@ class Viper {
   }
 
   /**
-   * Remove base slug from product category link.
-   *
-   * TODO: remove from the plugin, as it is too application-specific.
-   *
-   * @since 1.0.0
-   * @access public
-   *
-   * @param string $termlink Term link URL.
-   * @param object $term Term object.
-   * @param string $taxonomy Taxonomy slug.
-   */
-  public function rewrite_product_category_link($termlink, $term, $taxonomy) {
-    // Return early if the taxonomy is not 'product-category'.
-    if ( 'product-category' != $taxonomy )
-      return $termlink;
-
-    return str_replace( '/product-category/', '/', $termlink );
-  }
-
-  /**
    * Enable Divi Builder for Product Post Type.
    *
    * Only enables the Divi Builder if the CPT supports the editor.
