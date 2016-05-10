@@ -13,5 +13,10 @@
   "dist": {
     "url": "git@github.com:SqueezyWeb/viper.git",
     "type": "git"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-devleop": "1.0.0-beta2"
+    }
   }
 }
