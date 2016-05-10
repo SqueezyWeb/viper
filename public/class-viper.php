@@ -121,9 +121,6 @@ class Viper {
     // Enable Divi Builder in product Post Type.
     add_filter( 'et_builder_post_types', array( $this, 'enable_divi_builder' ) );
 
-    // Add Divi Builder Settings Metabox to product Post Type edit page.
-    add_action( 'add_meta_boxes', array( $this, 'enable_divi_builder_settings_metabox' ) );
-
     add_shortcode( 'products', array( $this, 'products_shortcode' ) );
   }
 
@@ -336,27 +333,6 @@ class Viper {
     if ( post_type_supports( 'product', 'editor' ) )
       $post_types[] = 'product';
     return $post_types;
-  }
-
-  /**
-   * Add Divi Builder Settings Metabox to Product Post Type edit page.
-   *
-   * @since 1.0.0
-   * @access public
-   */
-  public function enable_divi_builder_settings_metabox() {
-    if ( ! function_exists( 'et_single_settings_meta_box' ) )
-      return;
-
-    if ( post_type_supports( 'product', 'editor' ) )
-      add_meta_box(
-        'et_settings_meta',
-        __( 'Divi Custom Post Settings', 'Divi' ),
-        'et_single_settings_meta_box',
-        'product',
-        'side',
-        'high'
-      );
   }
 
   /**
