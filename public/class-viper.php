@@ -118,9 +118,6 @@ class Viper {
     // Load public-facing style sheet and JavaScript.
     add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 
-    //  Remove base slug from product-category links.
-    add_filter( 'term_link', array( $this, 'rewrite_product_category_link' ), 10, 3 );
-
     // Enable Divi Builder in product Post Type.
     add_filter( 'et_builder_post_types', array( $this, 'enable_divi_builder' ) );
 
