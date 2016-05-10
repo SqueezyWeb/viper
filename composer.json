@@ -16,7 +16,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-devleop": "1.0.0-beta2"
+      "dev-develop": "1.0.0-beta2"
     }
   }
 }
