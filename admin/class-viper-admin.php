@@ -89,16 +89,10 @@ class Viper_Admin {
 		 */
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/CPT_Columns.php' );
 		$post_columns = new CPT_columns( 'product' );
-		$post_columns->add_column( 'cmb2_field', array(
-		    'label' => __( 'CMB2 Field' ),
-		    'type' => 'post_meta',
-		    'meta_key' => '_product_' . $this->plugin_slug . '_text',
-		    'orderby' => 'meta_value',
+		$post_columns->add_column( 'menu_order', array(
+		    'label' => __( 'Order' ),
 		    'sortable' => true,
-		    'prefix' => '<b>',
-		    'suffix' => '</b>',
-		    'def' => 'Not defined', // Default value in case post meta not found
-		    'order' => '-1'
+				'type' => 'menu_order'
 			)
 		);
 

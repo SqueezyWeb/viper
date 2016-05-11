@@ -28,7 +28,7 @@ class Viper {
    *
    * @var     string
    */
-  const VERSION = '1.0.0-beta2';
+  const VERSION = '1.0.0-beta3';
 
   /**
    * Unique identifier for your plugin.
@@ -85,7 +85,14 @@ class Viper {
         'taxonomies' => array( 'product-category' ),
         'menu_icon' => 'dashicons-cart',
         'has_archive' => false,
-        'capability_type' => 'post'
+        'capability_type' => 'post',
+        'supports' => array(
+          'title',
+          'editor',
+          'thumbnail',
+          'excerpt',
+          'page-attributes'
+        )
       )
     );
 
