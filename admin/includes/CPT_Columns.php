@@ -77,8 +77,8 @@
 if ( !class_exists( 'CPT_columns' ) ) {
 
 	/**
-	 * CPT_columns 
-	 * Simple class to add remove and manage admin post columns 
+	 * CPT_columns
+	 * Simple class to add remove and manage admin post columns
 	 * @author Ohad Raz <admin@bainternet.info>
 	 * @version 0.1
 	 * @copyright 2013 Ohad Raz
@@ -110,7 +110,7 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		public $cpt_sortable_columns = array();
 
 		/**
-		 * $cpt_name 
+		 * $cpt_name
 		 *
 		 * Holds custom post type name
 		 * @var string
@@ -118,7 +118,7 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		public $cpt_name = '';
 
 		/**
-		 * $replace 
+		 * $replace
 		 *
 		 * Should coulmns be replace (true) or added (false)
 		 * @var boolean
@@ -126,8 +126,8 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		public $replace = false;
 
 		/**
-		 * __construct 
-		 * 
+		 * __construct
+		 *
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
 		 * @param string  $cpt     custom post type name
@@ -149,11 +149,11 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		}
 
 		/**
-		 * _cpt_columns 
-		 * 
+		 * _cpt_columns
+		 *
 		 * @author Ohad Raz <admin@bainternet.info> & Mte90 <mte90net@gmail.com>
 		 * @since 0.2
-		 * @param  array $defaults 
+		 * @param  array $defaults
 		 * @return array
 		 */
 		function _cpt_columns( $defaults ) {
@@ -185,13 +185,13 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		}
 
 		/**
-		 * _cpt_columns_remove 
+		 * _cpt_columns_remove
 		 *
-		 * used to remove columns 
+		 * used to remove columns
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
-		 * @param  array $columns 
-		 * @return array         
+		 * @param  array $columns
+		 * @return array
 		 */
 		function _cpt_columns_remove( $columns ) {
 			foreach ( $this->cpt_remove_columns as $key ) {
@@ -203,12 +203,12 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		}
 
 		/**
-		 * _sortable_columns 
+		 * _sortable_columns
 		 *
 		 * sets sortable columns
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
-		 * @param  array $columns 
+		 * @param  array $columns
 		 * @return array
 		 */
 		function _sortable_columns( $columns ) {
@@ -263,6 +263,10 @@ if ( !class_exists( 'CPT_columns' ) ) {
 						echo 'N/A';
 					}
 					break;
+				case 'menu_order':
+					$post = get_post( $post_id );
+					echo $post->menu_order;
+					break;
 				case 'post_meta':
 					$tmp = get_post_meta( $post_id, $column[ 'meta_key' ], true );
 					echo (!empty( $tmp )) ? $tmp : $column[ 'def' ];
@@ -300,12 +304,12 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		}
 
 		/**
-		 * _column_orderby 
+		 * _column_orderby
 		 *
 		 * used to roder by meta keys
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
-		 * @param  object $query 
+		 * @param  object $query
 		 * @return void
 		 */
 		function _column_orderby( $query ) {
@@ -373,10 +377,10 @@ if ( !class_exists( 'CPT_columns' ) ) {
 		}
 
 		/**
-		 * remove_column 
+		 * remove_column
 		 *
 		 * Used to remove columns
-		 * 
+		 *
 		 * @author Ohad Raz <admin@bainternet.info>
 		 * @since 0.1
 		 * @param  string $key column key to be removed
