@@ -1,54 +1,54 @@
 <?php
-	/**
-	 * @package     Freemius
-	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-	 * @since       1.0.3
-	 */
+    /**
+     * @copyright   Copyright (c) 2015, Freemius, Inc.
+     * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+     *
+     * @since       1.0.3
+     */
+    if (!defined('ABSPATH')) {
+        exit;
+    }
 
-	if ( ! defined( 'ABSPATH' ) ) {
-		exit;
-	}
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('json2');
+    fs_enqueue_local_script('postmessage', 'nojquery.ba-postmessage.min.js');
+    fs_enqueue_local_script('fs-postmessage', 'postmessage.js');
 
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'json2' );
-	fs_enqueue_local_script( 'postmessage', 'nojquery.ba-postmessage.min.js' );
-	fs_enqueue_local_script( 'fs-postmessage', 'postmessage.js' );
+    $slug = $VARS['slug'];
+    $fs = freemius($slug);
+    $timestamp = time();
 
-	$slug      = $VARS['slug'];
-	$fs        = freemius( $slug );
-	$timestamp = time();
+    $context_params = array(
+        'plugin_id' => $fs->get_id(),
+        'plugin_public_key' => $fs->get_public_key(),
+        'plugin_version' => $fs->get_plugin_version(),
+    );
 
-	$context_params = array(
-		'plugin_id'         => $fs->get_id(),
-		'plugin_public_key' => $fs->get_public_key(),
-		'plugin_version'    => $fs->get_plugin_version(),
-	);
+    // Get site context secure params.
+    if ($fs->is_registered()) {
+        $context_params = array_merge($context_params, FS_Security::instance()->get_context_params(
+            $fs->get_site(),
+            $timestamp,
+            'upgrade'
+        ));
+    }
 
-	// Get site context secure params.
-	if ( $fs->is_registered() ) {
-		$context_params = array_merge( $context_params, FS_Security::instance()->get_context_params(
-			$fs->get_site(),
-			$timestamp,
-			'upgrade'
-		) );
-	}
+    if ($fs->is_payments_sandbox()) {
+        // Append plugin secure token for sandbox mode authentication.)
 
-	if ( $fs->is_payments_sandbox() ) // Append plugin secure token for sandbox mode authentication.)
-	{
-		$context_params['sandbox'] = FS_Security::instance()->get_secure_token(
-			$fs->get_plugin(),
-			$timestamp,
-			'checkout'
-		);
-	}
+        $context_params['sandbox'] = FS_Security::instance()->get_secure_token(
+            $fs->get_plugin(),
+            $timestamp,
+            'checkout'
+        );
+    }
 
-	$query_params = array_merge( $context_params, $_GET, array(
-		'next'           => $fs->_get_admin_page_url( 'account', array( 'fs_action' => $slug . '_sync_license' ) ),
-		'plugin_version' => $fs->get_plugin_version(),
-		// Billing cycle.
-		'billing_cycle'  => fs_request_get( 'billing_cycle', WP_FS__PERIOD_ANNUALLY ),
-	) );
+    $query_params = array_merge($context_params, $_GET, array(
+        'next' => $fs->_get_admin_page_url('account', array('fs_action' => $slug.'_sync_license')),
+        'plugin_version' => $fs->get_plugin_version(),
+        // Billing cycle.
+        'billing_cycle' => fs_request_get('billing_cycle', WP_FS__PERIOD_ANNUALLY),
+    ));
 ?>
 
 	<div id="fs_pricing" class="wrap" style="margin: 0 0 -65px -20px;">
@@ -97,4 +97,4 @@
 			})(jQuery);
 		</script>
 	</div>
-<?php fs_require_template( 'powered-by.php' ) ?>
+<?php fs_require_template('powered-by.php') ?>

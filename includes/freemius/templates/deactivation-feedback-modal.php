@@ -1,42 +1,41 @@
 <?php
-	/**
-	 * @package     Freemius
-	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-	 * @since       1.1.2
-	 */
+    /**
+     * @copyright   Copyright (c) 2015, Freemius, Inc.
+     * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+     *
+     * @since       1.1.2
+     */
+    if (!defined('ABSPATH')) {
+        exit;
+    }
 
-	if ( ! defined( 'ABSPATH' ) ) {
-		exit;
-	}
+    $slug = $VARS['slug'];
+    $fs = freemius($slug);
 
-	$slug = $VARS['slug'];
-	$fs   = freemius( $slug );
+    $confirmation_message = $fs->apply_filters('uninstall_confirmation_message', '');
 
-	$confirmation_message = $fs->apply_filters( 'uninstall_confirmation_message', '' );
+    $reasons = $VARS['reasons'];
 
-	$reasons = $VARS['reasons'];
+    $reasons_list_items_html = '';
 
-	$reasons_list_items_html = '';
-
-	foreach ( $reasons as $reason ) {
-		$list_item_classes = 'reason' . ( ! empty( $reason['input_type'] ) ? ' has-input' : '' );
-		$reasons_list_items_html .= '<li class="' . $list_item_classes . '" data-input-type="' . $reason['input_type'] . '" data-input-placeholder="' . $reason['input_placeholder'] . '"><label><span><input type="radio" name="selected-reason" value="' . $reason['id'] . '"/></span><span>' . $reason['text'] . '</span></label></li>';
-	}
+    foreach ($reasons as $reason) {
+        $list_item_classes = 'reason'.(!empty($reason['input_type']) ? ' has-input' : '');
+        $reasons_list_items_html .= '<li class="'.$list_item_classes.'" data-input-type="'.$reason['input_type'].'" data-input-placeholder="'.$reason['input_placeholder'].'"><label><span><input type="radio" name="selected-reason" value="'.$reason['id'].'"/></span><span>'.$reason['text'].'</span></label></li>';
+    }
 ?>
 <script type="text/javascript">
 (function ($) {
-	var reasonsHtml = <?php echo json_encode( $reasons_list_items_html ); ?>,
+	var reasonsHtml = <?php echo json_encode($reasons_list_items_html); ?>,
 	    modalHtml =
-		    '<div class="fs-modal<?php echo empty( $confirmation_message ) ? ' no-confirmation-message' : ''; ?>">'
+		    '<div class="fs-modal<?php echo empty($confirmation_message) ? ' no-confirmation-message' : ''; ?>">'
 		    + '	<div class="fs-modal-dialog">'
 		    + '		<div class="fs-modal-body">'
 		    + '			<div class="fs-modal-panel" data-panel-id="confirm"><p><?php echo $confirmation_message; ?></p></div>'
-		    + '			<div class="fs-modal-panel active" data-panel-id="reasons"><h3><strong><?php printf( __fs(  'deactivation-share-reason' , $slug ) ); ?>:</strong></h3><ul id="reasons-list">' + reasonsHtml + '</ul></div>'
+		    + '			<div class="fs-modal-panel active" data-panel-id="reasons"><h3><strong><?php printf(__fs('deactivation-share-reason', $slug)); ?>:</strong></h3><ul id="reasons-list">' + reasonsHtml + '</ul></div>'
 		    + '		</div>'
 		    + '		<div class="fs-modal-footer">'
 		    + '			<a href="#" class="button button-secondary button-deactivate"></a>'
-		    + '			<a href="#" class="button button-primary button-close"><?php printf( __fs(  'deactivation-modal-button-cancel' , $slug ) ); ?></a>'
+		    + '			<a href="#" class="button button-primary button-close"><?php printf(__fs('deactivation-modal-button-cancel', $slug)); ?></a>'
 		    + '		</div>'
 		    + '	</div>'
 		    + '</div>',
@@ -155,7 +154,7 @@
 			var _parent = $(this).parents('li:first');
 
 			$modal.find('.reason-input').remove();
-			$modal.find('.button-deactivate').text('<?php printf( __fs(  'deactivation-modal-button-submit' , $slug ) ); ?>');
+			$modal.find('.button-deactivate').text('<?php printf(__fs('deactivation-modal-button-submit', $slug)); ?>');
 
 			enableDeactivateButton();
 
@@ -168,7 +167,7 @@
 				_parent.find('input, textarea').attr('placeholder', inputPlaceholder).focus();
 
 				if (isOtherReasonSelected()) {
-					showMessage('<?php printf( __fs(  'ask-for-reason-message' , $slug ) ); ?>');
+					showMessage('<?php printf(__fs('ask-for-reason-message', $slug)); ?>');
 					disableDeactivateButton();
 				}
 			}
@@ -269,9 +268,9 @@
 
 		// Reset the deactivate button's text.
 		if ('confirm' === getCurrentPanel()) {
-			$deactivateButton.text('<?php printf( __fs( 'deactivation-modal-button-confirm' , $slug ) ); ?>');
+			$deactivateButton.text('<?php printf(__fs('deactivation-modal-button-confirm', $slug)); ?>');
 		} else {
-			$deactivateButton.text('<?php printf( __fs( 'skip-deactivate' , $slug ) ); ?>');
+			$deactivateButton.text('<?php printf(__fs('skip-deactivate', $slug)); ?>');
 		}
 	}
 

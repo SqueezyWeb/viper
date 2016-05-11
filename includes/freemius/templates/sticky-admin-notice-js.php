@@ -1,17 +1,16 @@
 <?php
-	/**
-	 * Sticky admin notices JavaScript handler for dismissing notice messages
-	 * by sending AJAX call to the server in order to remove the message from the Database.
-	 *
-	 * @package     Freemius
-	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-	 * @since       1.0.7
-	 */
-
-	if ( ! defined( 'ABSPATH' ) ) {
-		exit;
-	}
+    /**
+     * Sticky admin notices JavaScript handler for dismissing notice messages
+     * by sending AJAX call to the server in order to remove the message from the Database.
+     *
+     * @copyright   Copyright (c) 2015, Freemius, Inc.
+     * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+     *
+     * @since       1.0.7
+     */
+    if (!defined('ABSPATH')) {
+        exit;
+    }
 ?>
 <script type="text/javascript" >
 	jQuery(document).ready(function($) {

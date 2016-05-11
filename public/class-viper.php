@@ -1,12 +1,13 @@
 <?php
 
 /**
- * viper
+ * viper.
  *
- * @package   Viper
  * @author    Mattia Migliorini <mattia@squeezyweb.com>
  * @license   GPL-2.0+
+ *
  * @link      http://www.squeezyweb.com
+ *
  * @copyright 2016 SqueezyWeb
  */
 
@@ -17,11 +18,11 @@
  * If you're interested in introducing administrative or dashboard
  * functionality, then refer to `class-viper-admin.php`
  *
- * @package Viper
  * @author  Mattia Migliorini <mattia@squeezyweb.com>
  */
-class Viper {
-  /**
+class Viper
+{
+    /**
    * Plugin version, used for cache-busting of style and script file references.
    *
    * @since   1.0.0
@@ -63,13 +64,13 @@ class Viper {
   protected static $instance = null;
 
   /**
-   * Array of cpts of the plugin
+   * Array of cpts of the plugin.
    *
    * @var      array
    *
    * @since    1.0.0
    */
-  protected $cpts = array( 'product' );
+  protected $cpts = array('product');
 
   /**
    * Initialize the plugin by setting localization and loading public scripts
@@ -77,12 +78,13 @@ class Viper {
    *
    * @since     1.0.0
    */
-  private function __construct() {
-    // Create Custom Post Type https://github.com/jtsternberg/CPT_Core/blob/master/README.md
+  private function __construct()
+  {
+      // Create Custom Post Type https://github.com/jtsternberg/CPT_Core/blob/master/README.md
     register_via_cpt_core(
-      array( __( 'Product', $this->get_plugin_slug() ), __( 'Products', $this->get_plugin_slug() ), 'product' ),
+      array(__('Product', $this->get_plugin_slug()), __('Products', $this->get_plugin_slug()), 'product'),
       array(
-        'taxonomies' => array( 'product-category' ),
+        'taxonomies' => array('product-category'),
         'menu_icon' => 'dashicons-cart',
         'has_archive' => false,
         'capability_type' => 'post',
@@ -91,19 +93,19 @@ class Viper {
           'editor',
           'thumbnail',
           'excerpt',
-          'page-attributes'
-        )
+          'page-attributes',
+        ),
       )
     );
 
-    add_filter( 'pre_get_posts', array( $this, 'filter_search' ) );
+      add_filter('pre_get_posts', array($this, 'filter_search'));
 
     // Create Custom Taxonomy https://github.com/jtsternberg/Taxonomy_Core/blob/master/README.md
     register_via_taxonomy_core(
       array(
-        __( 'Category', $this->get_plugin_slug() ),
-        __( 'Categories', $this->get_plugin_slug() ),
-        'product-category'
+        __('Category', $this->get_plugin_slug()),
+        __('Categories', $this->get_plugin_slug()),
+        'product-category',
       ),
       array(
         'hierarchical' => true,
@@ -111,24 +113,24 @@ class Viper {
         'rewrite' => array(
           'slug' => '',
           'with_front' => false,
-          'hierarchical' => true
-        )
+          'hierarchical' => true,
+        ),
       ),
-      array( 'product' )
+      array('product')
     );
 
-    add_filter( 'body_class', array( $this, 'add_v_class' ), 10, 3 );
+      add_filter('body_class', array($this, 'add_v_class'), 10, 3);
 
     // Override the template hierarchy for load /templates/content-product.php
-    add_filter( 'template_include', array( $this, 'load_content_product' ) );
+    add_filter('template_include', array($this, 'load_content_product'));
 
     // Load public-facing style sheet and JavaScript.
-    add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
 
     // Enable Divi Builder in product Post Type.
-    add_filter( 'et_builder_post_types', array( $this, 'enable_divi_builder' ) );
+    add_filter('et_builder_post_types', array($this, 'enable_divi_builder'));
 
-    add_shortcode( 'products', array( $this, 'products_shortcode' ) );
+      add_shortcode('products', array($this, 'products_shortcode'));
   }
 
   /**
@@ -138,8 +140,9 @@ class Viper {
    *
    * @return    Plugin slug variable.
    */
-  public function get_plugin_slug() {
-    return self::$plugin_slug;
+  public function get_plugin_slug()
+  {
+      return self::$plugin_slug;
   }
 
   /**
@@ -149,29 +152,32 @@ class Viper {
    *
    * @return    Plugin name variable.
    */
-  public function get_plugin_name() {
-    return self::$plugin_name;
+  public function get_plugin_name()
+  {
+      return self::$plugin_name;
   }
 
   /**
-   * Return the version
+   * Return the version.
    *
    * @since    1.0.0
    *
    * @return    Version const.
    */
-  public function get_plugin_version() {
-    return self::VERSION;
+  public function get_plugin_version()
+  {
+      return self::VERSION;
   }
   /**
-   * Return the cpts
+   * Return the cpts.
    *
    * @since    1.0.0
    *
    * @return    Cpts array
    */
-  public function get_cpts() {
-    return $this->cpts;
+  public function get_cpts()
+  {
+      return $this->cpts;
   }
 
   /**
@@ -181,13 +187,14 @@ class Viper {
    *
    * @return    object    A single instance of this class.
    */
-  public static function get_instance() {
-    // If the single instance hasn't been set, set it now.
-    if ( null == self::$instance ) {
-        self::$instance = new self;
+  public static function get_instance()
+  {
+      // If the single instance hasn't been set, set it now.
+    if (null == self::$instance) {
+        self::$instance = new self();
     }
 
-    return self::$instance;
+      return self::$instance;
   }
 
   /**
@@ -197,7 +204,6 @@ class Viper {
    * will be used.
    *
    * @since 1.0.0
-   * @access public
    * @static
    *
    * @param int|object $post Optional. Post ID or object. Can be null in The
@@ -206,17 +212,19 @@ class Viper {
    * @ return array|false|WP_Error Array of term objects on success, false if
    * there are no terms or the post does not exist, WP_Error on failure.
    */
-  public static function get_the_categories( $post = null ) {
-    if ( is_null( $post ) )
-      global $post;
-    return get_the_terms( $post, 'product-category' );
+  public static function get_the_categories($post = null)
+  {
+      if (is_null($post)) {
+          global $post;
+      }
+
+      return get_the_terms($post, 'product-category');
   }
 
   /**
    * Retrieve a post's product categories as a list with specified format.
    *
    * @since 1.0.0
-   * @access public
    * @static
    *
    * @param int|object $post Optional. Post ID or object. Can be null in The
@@ -228,32 +236,35 @@ class Viper {
    * @return string|false|WP_Error A list of terms on success, false if there
    * are no terms, WP_Error on failure.
    */
-  public static function get_the_categories_list( $post = null, $before = '', $sep = '', $after = '' ) {
-    if ( is_null( $post ) )
-      global $post;
+  public static function get_the_categories_list($post = null, $before = '', $sep = '', $after = '')
+  {
+      if (is_null($post)) {
+          global $post;
+      }
 
     // If $post is null again, it has been left blank on function call, but
     // outside of The Loop.
-    if ( is_null( $post ) )
-      return new WP_Error(
+    if (is_null($post)) {
+        return new WP_Error(
         'bad_call',
-        sprintf( __( '<code>%s</code> has been called without passing the <code>$post</code> parameter outside of The Loop.', 'viper' ), __METHOD__ )
+        sprintf(__('<code>%s</code> has been called without passing the <code>$post</code> parameter outside of The Loop.', 'viper'), __METHOD__)
       );
+    }
 
     // Apply default separator.
-    if ( empty( $sep ) )
-      $sep = ', ';
+    if (empty($sep)) {
+        $sep = ', ';
+    }
 
-    $id = is_int( $post ) ? $post : $post->ID;
+      $id = is_int($post) ? $post : $post->ID;
 
-    return get_the_term_list( $id, 'product-category', $before, $sep, $after );
+      return get_the_term_list($id, 'product-category', $before, $sep, $after);
   }
 
   /**
    * Output a post's product categories list as a list with specified format.
    *
    * @since 1.0.0
-   * @access public
    * @static
    *
    * @param int|object $post Optional. Post ID or object. Can be null in The
@@ -262,66 +273,78 @@ class Viper {
    * @param string $sep Optional. Separate items using this.
    * @param string $after Optional. After list.
    */
-  public static function the_categories_list( $post = null, $before = '', $sep = '', $after = '' ) {
-    $list = self::get_the_categories_list( $post, $before, $sep, $after );
-    if ( is_wp_error( $list ) )
-      trigger_error( $list->get_error_message(), E_USER_WARNING );
-    else if ( $list )
-      echo $list;
+  public static function the_categories_list($post = null, $before = '', $sep = '', $after = '')
+  {
+      $list = self::get_the_categories_list($post, $before, $sep, $after);
+      if (is_wp_error($list)) {
+          trigger_error($list->get_error_message(), E_USER_WARNING);
+      } elseif ($list) {
+          echo $list;
+      }
   }
 
   /**
-   * Add support for custom CPT on the search box
+   * Add support for custom CPT on the search box.
    *
    * @since    1.0.0
    *
    * @param    object    $query
+   *
    * @return object
    */
-  public function filter_search( $query ) {
-    if ( $query->is_search ) {
-      // Mantain support for post
+  public function filter_search($query)
+  {
+      if ($query->is_search) {
+          // Mantain support for post
       $this->cpts[] = 'post';
-      $query->set( 'post_type', $this->cpts );
-    }
-    return $query;
+          $query->set('post_type', $this->cpts);
+      }
+
+      return $query;
   }
 
   /**
    * Register and enqueue public-facing style sheet.
    *
    * @since    1.0.0
-   * @return void
    */
-  public function enqueue_styles() {
-    wp_enqueue_style( $this->get_plugin_slug() . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+  public function enqueue_styles()
+  {
+      wp_enqueue_style($this->get_plugin_slug().'-plugin-styles', plugins_url('assets/css/public.css', __FILE__), array(), self::VERSION);
   }
 
   /**
-   * Add class in the body on the frontend
+   * Add class in the body on the frontend.
    *
    * @since    1.0.0
+   *
    * @param array $classes THe array with all the classes of the page.
+   *
    * @return array
    */
-  public function add_v_class( $classes ) {
-    $classes[] = $this->get_plugin_slug();
-    return $classes;
+  public function add_v_class($classes)
+  {
+      $classes[] = $this->get_plugin_slug();
+
+      return $classes;
   }
 
   /**
-   * Example for override the template system on the frontend
+   * Example for override the template system on the frontend.
    *
    * @since    1.0.0
+   *
    * @param string $original_template The original templace HTML.
+   *
    * @return string
    */
-  public function load_content_product( $original_template ) {
-    if ( is_singular( 'product' ) && in_the_loop() ) {
-      return v_get_template_part( 'content', 'product', false );
-    } else {
-      return $original_template;
-    }
+  public function load_content_product($original_template)
+  {
+      if (is_singular('product') && in_the_loop()) {
+          return v_get_template_part('content', 'product', false);
+      } else {
+          return $original_template;
+      }
   }
 
   /**
@@ -330,68 +353,71 @@ class Viper {
    * Only enables the Divi Builder if the CPT supports the editor.
    *
    * @since 1.0.0
-   * @access public
    *
    * @param array $post_types Divi Builder enabled post types.
    *
    * @return array Filtered Divi Builder enabled post types.
    */
-  public function enable_divi_builder( $post_types ) {
-    if ( post_type_supports( 'product', 'editor' ) )
-      $post_types[] = 'product';
-    return $post_types;
+  public function enable_divi_builder($post_types)
+  {
+      if (post_type_supports('product', 'editor')) {
+          $post_types[] = 'product';
+      }
+
+      return $post_types;
   }
 
   /**
    * Shortcode to display a set of products by category.
    *
    * @since 1.0.0
-   * @access public
    *
    * @param array $atts Shortcode attributes.
    *
    * @return string HTML code for the list of products.
    */
-  public function products_shortcode( $atts ) {
-    $atts = shortcode_atts(
+  public function products_shortcode($atts)
+  {
+      $atts = shortcode_atts(
       array(
-        'category' => ''
+        'category' => '',
       ),
       $atts,
       'products'
     );
 
-    $products = get_posts( array(
+      $products = get_posts(array(
       'posts_per_page' => -1,
       'product-category' => $atts['category'],
       'post_type' => 'product',
       'orderby' => 'title',
-      'order' => 'ASC'
+      'order' => 'ASC',
     ));
 
     // Initialize classes for template.
 
-    /**
+    /*
      * Products shortcode container classes.
      *
      * @since 1.0.0
      *
      * @param array $classes Array of classes for the container.
      */
-    $container_classes = apply_filters( 'viper_shortcode_products_container_classes', array( 'viper-contaner', 'products-container' ) );
+    $container_classes = apply_filters('viper_shortcode_products_container_classes', array('viper-contaner', 'products-container'));
 
-    /**
+    /*
      * Product thumbnail size.
      *
      * @since 1.0.0
      *
      * @param string|array $size Product thumbnail size.
      */
-    $thumbnail_size = apply_filters( 'viper_shortcode_products_thumbnail_size', 'medium' );
+    $thumbnail_size = apply_filters('viper_shortcode_products_thumbnail_size', 'medium');
 
     // TODO: include template to display products loop.
     ob_start();
-    include v_get_template_part( 'shortcode', 'products', false );
-    return ob_get_clean();
+      include v_get_template_part('shortcode', 'products', false);
+
+      return ob_get_clean();
   }
 }

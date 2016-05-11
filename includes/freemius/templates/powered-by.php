@@ -1,23 +1,22 @@
 <?php
-	/**
-	 * @package     Freemius
-	 * @copyright   Copyright (c) 2015, Freemius, Inc.
-	 * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-	 * @since       1.0.5
-	 */
+    /**
+     * @copyright   Copyright (c) 2015, Freemius, Inc.
+     * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+     *
+     * @since       1.0.5
+     */
+    if (!defined('ABSPATH')) {
+        exit;
+    }
 
-	if ( ! defined( 'ABSPATH' ) ) {
-		exit;
-	}
+    /*
+     * KEEP THE POWERED BY TAB AND GET ADDITIONAL - 1% - OFF THE COMMISSION
+     */
 
-	/**
-	 * KEEP THE POWERED BY TAB AND GET ADDITIONAL - 1% - OFF THE COMMISSION
-	 */
-
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'json2' );
-	fs_enqueue_local_script( 'postmessage', 'nojquery.ba-postmessage.min.js' );
-	fs_enqueue_local_script( 'fs-postmessage', 'postmessage.js' );
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('json2');
+    fs_enqueue_local_script('postmessage', 'nojquery.ba-postmessage.min.js');
+    fs_enqueue_local_script('fs-postmessage', 'postmessage.js');
 ?>
 
 <div id="piframe"></div>
