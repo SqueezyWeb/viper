@@ -85,7 +85,14 @@ class Viper {
         'taxonomies' => array( 'product-category' ),
         'menu_icon' => 'dashicons-cart',
         'has_archive' => false,
-        'capability_type' => 'post'
+        'capability_type' => 'post',
+        'supports' => array(
+          'title',
+          'editor',
+          'thumbnail',
+          'excerpt',
+          'page-attributes'
+        )
       )
     );
 
