@@ -58,9 +58,6 @@ class Viper_Admin {
 		$this->version = $plugin->get_plugin_version();
 		$this->cpts = $plugin->get_cpts();
 
-		// Load admin style in dashboard for the At glance widget
-		add_action( 'admin_head-index.php', array( $this, 'enqueue_admin_styles' ) );
-
 		// Add the options page and menu item.
 		// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
